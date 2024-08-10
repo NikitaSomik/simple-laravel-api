@@ -7,7 +7,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Modules\Ad\Models\Ad;
+use Modules\Submission\Models\Submission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
         //            'email' => 'test@example.com',
         //        ]);
 
-        Ad::factory()->count(10)->create();
+        Submission::factory()->count(10)->create();
     }
 }
