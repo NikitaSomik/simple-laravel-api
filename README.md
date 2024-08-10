@@ -6,7 +6,9 @@
 2. ####Run through docker-compose in root directory project simple-laravel-api
 3. Copy .env.example to .env
 
-   `cp .env.example .env`
+   ```bash
+   cp .env.example .env
+   ```
 
 4. Download composer docker image to install dependencies.
 
