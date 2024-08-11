@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Modules\Submission\DTOs\SubmissionDto;
 use Modules\Submission\Events\SubmissionSaved;
 use Modules\Submission\Models\Submission;
 
@@ -20,16 +21,10 @@ class ProcessSubmission implements ShouldQueue
     use SerializesModels;
 
     /**
-     * @var array<string, string>
+     * @param SubmissionDto $submissionDto
      */
-    public array $data;
-
-    /**
-     * @param  array<string, string>  $data
-     */
-    public function __construct(array $data)
+    public function __construct(protected SubmissionDto $submissionDto)
     {
-        $this->data = $data;
     }
 
     /**
@@ -37,7 +32,7 @@ class ProcessSubmission implements ShouldQueue
      */
     public function handle(): void
     {
-        $submission = Submission::create($this->data);
+        $submission = Submission::create($this->submissionDto->toArray());
         event(new SubmissionSaved($submission));
     }
 }
