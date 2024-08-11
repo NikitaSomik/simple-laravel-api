@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Submission\Database\Factories\SubmissionFactory;
 
+/**
+ * @mixin IdeHelperSubmission
+ */
 class Submission extends Model
 {
     use HasFactory;
