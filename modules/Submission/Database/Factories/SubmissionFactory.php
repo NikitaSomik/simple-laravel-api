@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Submission\Database\Factories;
 
-use Modules\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Submission\Models\Submission;
 
 class SubmissionFactory extends Factory
 {

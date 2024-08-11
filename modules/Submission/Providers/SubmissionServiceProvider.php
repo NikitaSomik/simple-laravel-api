@@ -8,7 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class SubmissionServiceProvider extends ServiceProvider
 {
-
     public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');

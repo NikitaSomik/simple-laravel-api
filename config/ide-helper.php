@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Filename
@@ -309,7 +310,6 @@ return [
     |
     */
     'post_migrate' => [
-         'ide-helper:models -M',
+        'ide-helper:models -M',
     ],
-
 ];
