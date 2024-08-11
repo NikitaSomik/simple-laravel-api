@@ -1,0 +1,12 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+parameters:
+    level: 7
+    paths:
+        - app
+        - modules
+    scanFiles:
+        - _ide_helper.php
+        - _ide_helper_models.php
+        - .phpstorm.meta.php
+    checkGenericClassInNonGenericObjectType: false

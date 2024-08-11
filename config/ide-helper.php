@@ -140,6 +140,7 @@ return [
 
     'model_locations' => [
         'app',
+        'modules',
     ],
 
     /*
