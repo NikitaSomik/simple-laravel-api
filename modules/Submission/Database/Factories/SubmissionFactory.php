@@ -7,9 +7,6 @@ namespace Modules\Submission\Database\Factories;
 use Modules\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class SubmissionFactory extends Factory
 {
     protected $model = Submission::class;
