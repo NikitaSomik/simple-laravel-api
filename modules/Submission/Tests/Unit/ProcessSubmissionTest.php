@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Submission\Tests;
+namespace Modules\Submission\Tests\Unit;
 
 use Illuminate\Support\Facades\Event;
 use Mockery;

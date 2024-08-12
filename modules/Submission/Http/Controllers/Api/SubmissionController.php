@@ -9,15 +9,17 @@ use Illuminate\Http\JsonResponse;
 use Modules\Submission\DTOs\SubmissionDto;
 use Modules\Submission\Http\Requests\SubmissionRequest;
 use Modules\Submission\Jobs\ProcessSubmission;
+use Modules\Submission\Models\Submission;
+use Symfony\Component\HttpFoundation\Response;
 
 class SubmissionController extends Controller
 {
-    public function submit(SubmissionRequest $request): JsonResponse
+    public function submit(SubmissionRequest $request, Submission $submission): JsonResponse
     {
         $submissionDto = new SubmissionDto(...$request->validated());
 
-        ProcessSubmission::dispatch($submissionDto);
+        ProcessSubmission::dispatch($submission, $submissionDto);
 
-        return response()->json(['message' => 'Submission received and is being processed.'], 202);
+        return response()->json(['message' => 'Submission received and is being processed.'], Response::HTTP_ACCEPTED);
     }
 }
