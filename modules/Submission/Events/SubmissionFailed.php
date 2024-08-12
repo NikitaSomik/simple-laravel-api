@@ -6,14 +6,15 @@ namespace Modules\Submission\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Modules\Submission\Models\Submission;
+use Modules\Submission\DTOs\SubmissionDto;
+use Throwable;
 
-class SubmissionSaved
+class SubmissionFailed
 {
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(public Submission $submission)
+    public function __construct(public SubmissionDto $submissionDto, public Throwable $exception)
     {
     }
 }
