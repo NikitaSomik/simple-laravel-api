@@ -24,7 +24,7 @@ services:
         depends_on:
             - mysql
     mysql:
-        image: 'mysql/mysql-server:8.0'
+        image: &mysql-image 'mysql/mysql-server:8.0'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
@@ -47,6 +47,28 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+
+    db-test:
+        image: *mysql-image
+        environment:
+            MYSQL_ROOT_PASSWORD: 'test_db'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: 'test_db_laravel'
+            MYSQL_USER: 'test_sail'
+            MYSQL_PASSWORD: 'password'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        networks:
+            - sail
+        healthcheck:
+            test:
+                - CMD
+                - mysqladmin
+                - ping
+                - '-p${DB_PASSWORD}'
+            retries: 3
+            timeout: 5s
+
+
 networks:
     sail:
         driver: bridge
