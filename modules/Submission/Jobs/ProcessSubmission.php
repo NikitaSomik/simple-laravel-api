@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\Submission\DTOs\SubmissionDto;
 use Modules\Submission\Events\SubmissionFailed;
 use Modules\Submission\Events\SubmissionSaved;
-use Modules\Submission\Models\Submission;
+use Modules\Submission\Services\SubmissionServiceInterface;
 use Throwable;
 
 class ProcessSubmission implements ShouldQueue
@@ -28,7 +28,7 @@ class ProcessSubmission implements ShouldQueue
      */
     public int $tries = 3;
 
-    public function __construct(public Submission $submission, public SubmissionDto $submissionDto)
+    public function __construct(public SubmissionDto $submissionDto)
     {
     }
 
@@ -47,11 +47,11 @@ class ProcessSubmission implements ShouldQueue
      *
      * @throws Throwable
      */
-    public function handle(): void
+    public function handle(SubmissionServiceInterface $submissionService): void
     {
-        DB::transaction(function (): void {
+        DB::transaction(function () use ($submissionService): void {
             try {
-                $submission = $this->submission::create($this->submissionDto->toArray());
+                $submission = $submissionService->createSubmission($this->submissionDto);
                 event(new SubmissionSaved($submission));
             } catch (Throwable $exception) {
                 $this->failed($exception);
