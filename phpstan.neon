@@ -1,5 +1,6 @@
 includes:
     - ./vendor/nunomaduro/larastan/extension.neon
+    - ./vendor/phpstan/phpstan-mockery/extension.neon
 parameters:
     level: 7
     paths:
@@ -9,4 +10,7 @@ parameters:
         - _ide_helper.php
         - _ide_helper_models.php
         - .phpstorm.meta.php
+    ignoreErrors:
+        - '#Call to an undefined static method Illuminate\\Support\\Facades\\Event::fake\(\).#'
+        - '#Call to an undefined static method Illuminate\\Support\\Facades\\Queue::fake\(\).#'
     checkGenericClassInNonGenericObjectType: false
