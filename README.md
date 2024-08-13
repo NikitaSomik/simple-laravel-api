@@ -40,3 +40,33 @@
    sail exec -it laravel.test php artisan storage:link
    ```
 
+9. Run migrations and seeds
+
+   ```bash
+   sail exec -it laravel.test php artisan migrate --seed
+   ```
+   
+10. Run tests
+
+    ```bash
+    sail exec -it laravel.test php artisan test
+    ```
+
+11. API Documentation
+
+    ```bash
+    http://localhost/docs/api#/
+    ```
+
+12. Web UI Supervisor
+
+    ```bash
+    http://localhost:9001
+    ```
+13. Health App
+
+    ```bash
+    http://localhost/up
+    ```    
+    
+
