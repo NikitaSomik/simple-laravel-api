@@ -44,10 +44,12 @@ class ProcessSubmissionTest extends TestCase
         $mockSubmissionService->shouldReceive('createSubmission')
             ->once()
             ->with($submissionDto)
-            ->andReturn(new Submission([
-                ...$submissionDto->toArray(),
-                'id' => 1,
-            ]));
+            ->andReturn(
+                new Submission([
+                    ...$submissionDto->toArray(),
+                    'id' => 1,
+                ])
+            );
 
         // Bind the mock service to the service container
         App::instance(SubmissionServiceInterface::class, $mockSubmissionService);

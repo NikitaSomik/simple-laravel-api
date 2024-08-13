@@ -67,19 +67,27 @@
     http://localhost/up
     ```    
 
-14. Run tests
+14. Generate IDE Helper File
+
+- `sail exec -it laravel.test php artisan ide-helper:generate` - [PHPDoc generation for Laravel Facades](#automatic-phpdoc-generation-for-laravel-facades)
+- `sail exec -it laravel.test php artisan ide-helper:models -M` - [PHPDocs for models](#automatic-phpdocs-for-models)
+- `sail exec -it laravel.test php artisan ide-helper:meta` - [PhpStorm Meta file](#phpstorm-meta-for-container-instances)
+- `sail exec -it laravel.test php artisan ide-helper:eloquent` - Adds Eloquent, Database\Eloquent\Builder, and Database\Query\Builder to the base model class. This is done right in the vendor directory. This gives a hint to the models that they have all the query builder methods. It is very convenient if you use scope functions.
+
+15. Run tests
 
     ```bash
     sail exec -it laravel.test php artisan test
     ```
 
-15. Run Larastan (PHPStan)
+16. Run Larastan (PHPStan)
 
     ```bash
     sail exec -it laravel.test composer phpstan
     ```
-    
-16. Run Laravel Pint
+
+17. Run Laravel Pint
+
     ```bash
     sail exec -it laravel.test ./vendor/bin/pint
     ```
