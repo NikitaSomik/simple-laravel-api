@@ -49,44 +49,50 @@
    sail exec -it laravel.test php artisan migrate --seed
    ```
 
-11. API Documentation
+11. Run laravel-worker by supervisorctl
+
+    ```bash
+    sail exec -it laravel.test supervisorctl start laravel-worker
+    ```
+
+12. API Documentation
 
     ```bash
     http://localhost/docs/api#/
     ```
 
-12. Web UI Supervisor
+13. Web UI Supervisor
 
     ```bash
     http://localhost:9001
     ```
 
-13. Health App
+14. Health App
 
     ```bash
     http://localhost/up
     ```    
 
-14. Generate IDE Helper File
+15. Generate IDE Helper File
 
 - `sail exec -it laravel.test php artisan ide-helper:generate` - [PHPDoc generation for Laravel Facades](#automatic-phpdoc-generation-for-laravel-facades)
 - `sail exec -it laravel.test php artisan ide-helper:models -M` - [PHPDocs for models](#automatic-phpdocs-for-models)
 - `sail exec -it laravel.test php artisan ide-helper:meta` - [PhpStorm Meta file](#phpstorm-meta-for-container-instances)
 - `sail exec -it laravel.test php artisan ide-helper:eloquent` - Adds Eloquent, Database\Eloquent\Builder, and Database\Query\Builder to the base model class. This is done right in the vendor directory. This gives a hint to the models that they have all the query builder methods. It is very convenient if you use scope functions.
 
-15. Run tests
+16. Run tests
 
     ```bash
     sail exec -it laravel.test php artisan test
     ```
 
-16. Run Larastan (PHPStan)
+17. Run Larastan (PHPStan)
 
     ```bash
     sail exec -it laravel.test composer phpstan
     ```
 
-17. Run Laravel Pint
+18. Run Laravel Pint
 
     ```bash
     sail exec -it laravel.test ./vendor/bin/pint
