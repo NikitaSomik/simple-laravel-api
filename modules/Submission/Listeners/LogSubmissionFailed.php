@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Submission\Listeners;
 
-use Illuminate\Support\Facades\Log;
 use Modules\Submission\Events\SubmissionFailed;
+use Psr\Log\LoggerInterface;
 
-class LogSubmissionFailed
+final readonly class LogSubmissionFailed
 {
+    public function __construct(private LoggerInterface $logger) {}
+
     public function handle(SubmissionFailed $event): void
     {
-        Log::error('Submission processing failed: ', [
+        $this->logger->error('Submission processing failed: ', [
             'exception' => $event->exception->getMessage(),
             'submission' => $event->submissionDto->toArray(),
         ]);

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Modules\Submission\Models\Submission;
 
-class SubmissionSaved
+final readonly class SubmissionSaved
 {
     use Dispatchable;
     use SerializesModels;

@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Modules\Submission\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\DB;
 use Modules\Submission\DTOs\SubmissionDto;
 use Modules\Submission\Events\SubmissionFailed;
 use Modules\Submission\Events\SubmissionSaved;
 use Modules\Submission\Services\SubmissionServiceInterface;
 use Throwable;
 
-class ProcessSubmission implements ShouldQueue
+final class ProcessSubmission implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -28,9 +28,7 @@ class ProcessSubmission implements ShouldQueue
      */
     public int $tries = 3;
 
-    public function __construct(public SubmissionDto $submissionDto)
-    {
-    }
+    public function __construct(private readonly SubmissionDto $submissionDto) {}
 
     /**
      * Calculate the number of seconds to wait before retrying the job.
@@ -47,23 +45,16 @@ class ProcessSubmission implements ShouldQueue
      *
      * @throws Throwable
      */
-    public function handle(SubmissionServiceInterface $submissionService): void
+    public function handle(Dispatcher $dispatcher, SubmissionServiceInterface $submissionService): void
     {
-        DB::transaction(function () use ($submissionService): void {
-            try {
-                $submission = $submissionService->createSubmission($this->submissionDto);
-                event(new SubmissionSaved($submission));
-            } catch (Throwable $exception) {
-                $this->failed($exception);
-            }
-        });
-    }
+        try {
+            $submission = $submissionService->createSubmission($this->submissionDto);
 
-    /**
-     * Handle a job failure.
-     */
-    public function failed(?Throwable $exception): void
-    {
-        event(new SubmissionFailed($this->submissionDto, $exception));
+            $dispatcher->dispatch(new SubmissionSaved($submission));
+        } catch (Throwable $exception) {
+            $dispatcher->dispatch(new SubmissionFailed($this->submissionDto, $exception));
+
+            throw $exception;
+        }
     }
 }

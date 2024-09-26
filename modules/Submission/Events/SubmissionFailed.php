@@ -9,12 +9,10 @@ use Illuminate\Queue\SerializesModels;
 use Modules\Submission\DTOs\SubmissionDto;
 use Throwable;
 
-class SubmissionFailed
+final readonly class SubmissionFailed
 {
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(public SubmissionDto $submissionDto, public Throwable $exception)
-    {
-    }
+    public function __construct(public SubmissionDto $submissionDto, public Throwable $exception) {}
 }
