@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Modules\Submission\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Bus\Dispatcher;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Modules\Submission\DTOs\SubmissionDto;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Modules\Submission\Http\Requests\SubmissionRequest;
 use Modules\Submission\Jobs\ProcessSubmission;
 use Symfony\Component\HttpFoundation\Response;
