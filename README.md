@@ -10,10 +10,10 @@
    cp .env.example .env
    ```
 
-4. Copy .env.testing.example to ..env.testing
+4. Copy .env.testing.example to .env.testing
 
    ```bash
-   cp .env.example .env
+   cp .env.testing.example .env.testing
    ```
 
 5. Download composer docker image to install dependencies.

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Submission\Providers;
 
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\ServiceProvider;
 use Modules\Submission\Models\Submission;
 use Modules\Submission\Services\SubmissionService;
@@ -22,7 +23,10 @@ class SubmissionServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(SubmissionServiceInterface::class, function ($app) {
-            return new SubmissionService(new Submission());
+            return new SubmissionService(
+                $app->make(DatabaseManager::class),
+                $app->make(Submission::class)
+            );
         });
     }
 }
